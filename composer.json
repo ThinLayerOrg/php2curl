@@ -1,0 +1,31 @@
+{
+    "name": "thinlayer/php2curl",
+    "description": "Generates a CURL request from a request to the PHP Application",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ilia Yatsenko",
+            "email": "ilia.yatsenko@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^7.4",
+        "ext-curl": "*",
+        "ext-mbstring": "*",
+        "ralouphie/getallheaders": "^3.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "ThinLayer\\Php2Curl\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "ThinLayer\\Php2Curl\\Tests\\": "tests"
+        }
+    }
+}
