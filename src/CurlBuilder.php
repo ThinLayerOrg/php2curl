@@ -30,7 +30,7 @@ class CurlBuilder
         $this->method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
         $this->scheme = $_SERVER['REQUEST_SCHEME'] ?? 'http';
         $this->host = $_SERVER['SERVER_NAME'] ?? 'localhost';
-        $this->port = $_SERVER['SERVER_PORT'] ?? 80;
+        $this->port = (int)($_SERVER['SERVER_PORT'] ?? 80);
         $this->uri = $_SERVER['REQUEST_URI'] ?? '/';
         $this->post = $_POST;
     }
