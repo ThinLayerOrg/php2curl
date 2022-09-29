@@ -23,6 +23,9 @@ class CurlBuilder
     private array $headers;
     private ?string $input;
 
+    /** @var array<string, bool> */
+    private array $allowedHeaderMap = [];
+
     public function __construct()
     {
         $this->headers = $this->processHeaders(getallheaders());
@@ -74,6 +77,17 @@ class CurlBuilder
     public function headers(array $headers): self
     {
         $this->headers = $this->processHeaders($headers);
+        return $this;
+    }
+
+    public function allowHeaders(string ...$headers): self
+    {
+        foreach ($headers as $header) {
+            $header = mb_strtolower($header);
+            $this->allowedHeaderMap[$header] = true;
+        }
+
+        $this->headers = $this->processHeaders($this->headers);
         return $this;
     }
 
@@ -160,6 +174,10 @@ class CurlBuilder
         $result = [];
         foreach ($headers as $header => $value) {
             $header = mb_strtolower($header);
+            if (!empty($this->allowedHeaderMap) && empty($this->allowedHeaderMap[$header])) {
+                continue;
+            }
+
             $value = is_array($value) ? implode(', ', $value) : $value;
             $result[$header] = $value;
         }
