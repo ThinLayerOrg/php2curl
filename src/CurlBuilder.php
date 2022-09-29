@@ -25,7 +25,7 @@ class CurlBuilder
 
     public function __construct()
     {
-        $this->headers = getallheaders();
+        $this->headers = $this->processHeaders(getallheaders());
         $this->input = file_get_contents('php://input');
         $this->method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
         $this->scheme = $_SERVER['REQUEST_SCHEME'] ?? 'http';
