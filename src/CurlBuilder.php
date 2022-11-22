@@ -178,6 +178,10 @@ class CurlBuilder
                 continue;
             }
 
+            if (empty($value)) {
+                continue;
+            }
+
             $value = is_array($value) ? implode(', ', $value) : $value;
             $result[$header] = $value;
         }
